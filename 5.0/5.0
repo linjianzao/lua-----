@@ -1,0 +1,12 @@
+5.0 函数
+
+如果函数只有一个参数，并且该参数是一个string或table，函数的括号是可选的.比如:
+print "Hello World" <-等价-> print("Hello World")
+dofile 'a.lua' <-等价-> dofile ('a.lua')
+print [[a multi-line <-等价-> print([[a multi-line
+message]] message]])
+f{x=10, y=20} <-等价-> f({x=10, y=20})
+type{} <-等价-> type({})
+
+lua也提供特殊的语法来进行面向对象的调用，: 冒号操作
+o:foo(x)  <-等价-> o.foo(o,x)   --调用o.foo 然后把o当成第一个参数。
