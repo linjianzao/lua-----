@@ -1,0 +1,31 @@
+1.0开始
+
+安装lua：
+window： https://code.google.com/p/luaforwindows/downloads/list
+linux： yum 或 apt 直接安装 sudo yum install lua (有些有默认自带，终端敲”lua“ 回车看看)
+
+
+输出Hello World：
+创建一个hello.lua文件，然后写入 print("Hello World")
+
+运行：lua hello.lua
+
+结果：
+E:\workspace\lua>lua hello.lua
+Hello World
+
+这样就输出了一个Hello World
+
+
+--写一个阶乘函数，用这个来看lua的一些特性
+function fact(n)
+        if n==0 then
+                return 1
+        else
+                return n*fact(n-1)
+        end
+end
+
+print("enter a number:")
+a=io.read("*n")        --读取一个数字
+print(fact(a))
