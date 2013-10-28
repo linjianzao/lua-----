@@ -10,3 +10,20 @@ type{} <-等价-> type({})
 
 lua也提供特殊的语法来进行面向对象的调用，: 冒号操作
 o:foo(x)  <-等价-> o.foo(o,x)   --调用o.foo 然后把o当成第一个参数。
+
+
+省略参数调用：
+  function f (a, b) print(a, b) end
+  调用结果：
+  f(3) --> 3 nil  只填第一个参数，b被自动初始化成nil
+  f(3, 4) --> 3 4  填两个参数，政策调用
+  f(3, 4, 5) --> 3 4 填3个参数，第三个参数被丢弃 
+
+
+function incCount (n)
+  n = n or 1
+  count = count + n
+end
+
+incCount()这样调用count 就自增1 ，n 被初始化成nil
+
