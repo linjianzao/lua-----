@@ -1,0 +1,52 @@
+2.5 Tables
+  LUA使用 Tables实现关联数组。Tables也用来实现包和对象，比如我们调用io.read()，io就是Tables，read就是key值了。
+  你的程序只能操作Tables的指针或引用。lua不会在底层复制或创建新数组。
+  
+  a = {} --创建一个table a 存储它自己 
+  k = "x"
+  a[k] = 10 --key="x" 值是 10 
+  a[20] = "great" --key=20 值是 "great"
+  print(a["x"]) --> 10
+  k = 20
+  print(a[k]) --> "great"
+  a["x"] = a["x"] + 1 -- 自增 "x"
+  print(a["x"]) --> 11
+  
+  table经常是匿名的，持有table的变量和表本身没有固定的关系
+  a = {}
+  a["x"] = 10
+  b = a -- b和a指向同一个表。
+  print(b["x"]) --> 10
+  b["x"] = 20
+  print(a["x"]) --> 20
+  a = nil -- 只有b关联table
+  b = nil -- 没有关联到table的
+  
+  当table没有关联，lua的回收将会删除table，并重新使用它的内存。
+  a = {} -- empty table
+  -- create 1000 new entries
+  for i = 1, 1000 do a[i] = i*2 end
+  print(a[9]) --> 18
+  a["x"] = 10
+  print(a["x"]) --> 10
+  print(a["y"]) --> nil
+  注意最后一行，像全局变量 table没有初始化的字段是nil。所以你可以给一个table的字段赋上nil来删除它。
+  这是因为lua把全局变量存储在字典table。
+  
+  lua支持 a.name 语法糖 就相当于访问 a["name"]，并且可以自由的混合使用。例子：
+  a.x = 10 -- same as a["x"] = 10
+  print(a.x) -- same as print(a["x"])
+  print(a.y) -- same as print(a["y"])
+  
+  要注意a.x 和 a[x]是不一样的，a.x代表的是a["x"]，例子：
+  a = {}
+  x = "y"
+  a[x] = 10 -- put 10 in field "y"
+  print(a[x]) --> 10 -- value of field "y"
+  print(a.x) --> nil -- value of field "x" (undefined)
+  print(a.y) --> 10 -- value of field "y"
+  
+  lua访问table的习惯是从1开始而不是其他 语言的 0。
+  lua把table的长度存储在以n为key的table。
+  
+  
