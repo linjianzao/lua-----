@@ -50,8 +50,20 @@
   
   当lua发现number期望转换成string时会把number转换成string,例子：
     print(10 .. 20) --> 1020
+  ..是lua里的字符串链接符。链接符和字符串之间要用空格隔开。
   
+  10==“10”结果是false。也就是说lua里==必须类型和值一样才是true
+  可以用tonumbe把字符串转换成number，字符串不是适当的number返回nil，例子：
+  line = io.read() -- read a line
+  n = tonumber(line) -- try to convert it to a number
+  if n == nil then
+  error(line .. " is not a valid number")
+  else
+  print(n*2)
+  end
   
+  number转换成string用 tostring
   
+  print(tostring(10) == "10") --> true
+  print(10 .. "" == "10") --> true
   
-    
