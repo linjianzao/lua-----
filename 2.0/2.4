@@ -1,0 +1,57 @@
+2.4 string
+  书里说lua string类型值不能修改，但我测试是可以的。
+  string类型有内存自动管理，像其他lua对象（tables, functions, etc.）。
+  一个字符串可以包含单个字母或者一本书。100K 或 1M的字符对lua来说小菜一碟。
+  
+  可以使用#来获取字符串的长度，例子：
+  a = "hello"
+  print(#a) --> 5
+  print(#"good\0bye") --> 8
+  
+  
+  文字字符
+  使用单引号或者双引号，他们是等价的。
+  a = "a line"
+  b = 'another line'
+  
+  lua转义列表：
+  \a bell
+  \b back space
+  \f form feed
+  \n newline
+  \r carriage return
+  \t horizontal tab
+  \v vertical tab
+  \\ backslash
+  \" double quote
+  \' single quote
+  
+  
+  长字符串
+  长字符串使用[[]]包含内容,例子：
+  page = [[
+    <html>
+    <head>
+    <title>An HTML Page</title>
+    </head>
+    <body>
+    <a href="http://www.lua.org">Lua</a>
+    </body>
+    </html>
+    ]]
+  
+  
+  类型自动转换
+  lua会在执行时会自动进行类型转换，例子：
+  print("10" + 1) --> 11
+  print("10 + 1") --> 10 + 1
+  print("-5.3e-10"*"2") --> -1.06e-09
+  print("hello" + 1) -- ERROR (cannot convert "hello")
+  
+  当lua发现number期望转换成string时会把number转换成string,例子：
+    print(10 .. 20) --> 1020
+  
+  
+  
+  
+    
