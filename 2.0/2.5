@@ -49,4 +49,20 @@
   lua访问table的习惯是从1开始而不是其他 语言的 0。
   lua把table的长度存储在以n为key的table。
   
+  因为lua里 不同类型但值相等的 是不一样的，所以table索引要明确 同一类型，例子：
+  
+  i = 10; j = "10"; k = "+10"
+  a = {}
+  a[i] = "one value"
+  a[j] = "another value"
+  a[k] = "yet another value"
+  print(a[i]) --> one value
+  print(a[j]) --> another value
+  print(a[k]) --> yet another value
+  print(a[tonumber(j)]) --> one value
+  print(a[tonumber(k)]) --> one value
+  
+  如果你没有key统一类型，可能会出现莫名其妙的问题
+  
+  
   
