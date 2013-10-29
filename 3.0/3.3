@@ -1,0 +1,35 @@
+3.3 Logical Operators 逻辑运算符
+
+  and or not 
+  
+  and 操作符：如果第一个参数是false返回false 其他的返回第二个参数
+  or操作法：如果第一个参数不是false 返回第一个参数。
+  其他情况返回第二个参数
+  nil是false，就是说如果值没有初始化或初始化nil 那就是false
+  print(4 and 5) --> 5
+  print(nil and 13) --> nil
+  print(false and 13) --> false
+  print(4 or 5) --> 4
+  print(false or 5) --> 5
+  
+  and和or都使用短路求值。就是说不会关心运行中遇到的类型错误
+  
+  lua的逻辑运算符经常用于：
+  x=x or v
+  相当于
+  if not x then x = v end
+  
+  (a and b)or c
+  相当于c中的
+  a?b:c
+  
+  比较x y 的大小，返回最大值
+  max = (x > y) and x or y
+  
+  
+  not经常返回boolean
+  print(not nil) --> true
+  print(not false) --> true
+  print(not 0) --> false
+  print(not not 1) --> true
+  print(not not nil) --> false
