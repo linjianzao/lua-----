@@ -1,0 +1,11 @@
+3.5 The Length Operator 长度运算符
+
+长度是指table和string。sting方面，代表一个string有几个字节。table方面，代表table的长度
+  print(a[#a]) -- prints the last value of sequence 'a' 打印a的最后一个值
+  a[#a] = nil -- removes this last value 删除最后一个值
+  a[#a + 1] = v -- appends 'v' to the end of the list 把v加到a的结尾
+  
+  
+  长度运算符无法判断一个list是否有nil。它只能对没有nil的list起作用。更确切的说是只对键值是数字的table其作用，如果table的键值没有数字那么length是0
+  
+  
