@@ -3,4 +3,8 @@
   print("Hello " .. "World") --> Hello World
   print(0 .. 1) --> 01
   print(000 .. 01) --> 01
-  注意
+  注意string 是固定值，连接操作一般是创建一个新的string 而不是修改它，例子：
+  
+  a = "Hello"
+  print(a .. " World") --> Hello World
+  print(a) --> Hello
