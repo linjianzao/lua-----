@@ -1,0 +1,49 @@
+4.2 Local Variables and Blocks 局部变量和作用域
+
+局部变量定义：
+j = 10 -- global variable 全局变量
+local i = 1 -- local variable 局部变量
+
+局部变量超过作用域就会失效：
+x = 10
+local i = 1 -- local to the chunk
+while i <= x do
+local x = i*2 -- local to the while body
+print(x) --> 2, 4, 6, 8, ...
+i = i + 1
+end
+
+
+if i > 20 then
+local x -- local to the "then" body
+x = 20
+print(x + 2) -- (would print 22 if test succeeded)
+else
+print(x) --> 10 (the global one)
+end
+print(x) --> 10 (the global one)
+
+以上的例子在交换模式(-i)下可能不会得到期望的结果，在交互模式下每一行都是一个堆（除非它不是一个完整的命令），
+你输入第二行的时候(local i=1)，lua会执行它然后开始下一行，这样局部变量i就超出了作用域。我们可以用 do-end解决这个问题：
+do
+local a2 = 2*a
+local d = (b^2 - 4*a*c)^(1/2)
+x1 = (-b + d)/a2
+x2 = (-b - d)/a2
+end -- scope of 'a2' and 'd' ends here
+print(x1, x2)
+
+你一输入do它会直到遇到end才停止。
+
+局部变量用来避免覆盖全局变量，访问局部变量比全局变量快，局部变量在作用域内可以回收空间。和全局变量的声明特性一样
+local a, b = 1, 10
+if a < b then
+print(a) --> 1
+local a -- '= nil' is implicit
+print(a) --> nil
+end -- ends the block started at 'then'
+print(a, b) --> 1 10
+
+lua习语：
+local foo = foo 创建一个局部变量foo 初始化为全局变量foo的值，这样局部变量foo的访问权限只有在声明后才能访问，
+这个特性用于当需要保护全局变量foo的原值，以避免全局变量被之后的函数改变值。它也一样比访问foo快。
