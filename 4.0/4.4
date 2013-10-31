@@ -1,0 +1,58 @@
+4.4 break, return, and goto
+  break, return用来跳出循环。goto跳到函数的任何地方
+  使用break结束循环(for, repeat, or while)
+  
+  return返回函数临时值或结束函数。它隐式的在函数的最后调用，所以你的函数如果没有返回值 return 可以省略
+  
+  由于语法原因，return要在 end,  else, 或 until 之前调用，例子：
+    local i = 1
+    while a[i] do
+    if a[i] == v then return i end
+    i = i + 1
+    end
+  
+    在块之间是使用return是会报错的。你可以使用do来做。
+    
+    function foo ()
+      return --<< SYNTAX ERROR
+      -- 'return' is the last statement in the next block
+      do return end -- OK
+      <other statements>
+    end
+    
+    goto会跳到对应的标记。
+    
+    while some_condition do
+    ::redo::
+    if some_other_condition then goto continue
+    else if yet_another_condition then goto redo
+    end
+    <some code>
+    ::continue::
+    end
+    
+    while some_condition do
+    if some_other_condition then goto continue end
+    local var = something
+    <some code>
+    ::continue::
+    end
+    
+    
+    Listing 4.1. An example of a state machine with goto:
+      ::s1:: do
+      local c = io.read(1)
+      if c == '0' then goto s2
+      elseif c == nil then print'ok'; return
+      else goto s1
+      end
+      end
+      ::s2:: do
+      local c = io.read(1)
+      if c == '0' then goto s1
+      elseif c == nil then print'not ok'; return
+      else goto s2
+      end
+      end
+      goto s1
+    
