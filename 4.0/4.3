@@ -1,0 +1,111 @@
+4.3 Control Structures 流程控制
+  if then else，例子 ：
+    if a < 0 then a = 0 end
+    if a < b then return a else return b end
+    if line > MAXLINES then
+    showpage()
+    line = 0
+    end
+  
+  elseif，例子：  
+    if op == "+" then
+    r = a + b
+    elseif op == "-" then
+    r = a - b
+    elseif op == "*" then
+    r = a*b
+    elseif op == "/" then
+    r = a/b
+    else
+    error("invalid operation")
+    end
+  lua里没有switch
+  
+  while，例子：
+    local i = 1
+    while a[i] do
+    print(a[i])
+    i = i + 1
+    end
+    
+  repeat，例子：
+    -- print the first non-empty input line
+    repeat
+    line = io.read()
+    until line ~= ""
+    print(line)
+    
+    
+  local sqr = x/2
+  repeat
+  sqr = (sqr + x/sqr)/2
+  local error = math.abs(sqr^2 - x)
+  until error < x/10000 -- local 'error' still visible here  
+  
+  Numeric for ：
+  for分两种一种是numeric for，另一种是numeric for
+    numeric for的语法：
+      for var = exp1, exp2, exp3 do
+      <something>
+      end
+  使用：
+  for i = 1, f(x) do print(i) end
+  for i = 10, 1, -1 do print(i) end
+  要想无限制的执行可以使用math.huge：
+    for i = 1, math.huge do
+      if (0.3*i^3 - 20*i^2 - 500 >= 0) then
+      print(i)
+      break
+      end
+    end
+    
+  i是局部变量 作用域在for end 之间，例子：
+  for i = 1, 10 do print(i) end
+  max = i -- probably wrong! 'i' here is global
+    
+  如果想在for之外使用i，则使用其他变量赋值就可以：
+    -- find a value in a list
+      local found = nil
+      for i = 1, #a do
+      if a[i] < 0 then
+      found = i -- save value of 'i'
+      break
+      end
+      end
+      print(found)
+    
+  Generic for：
+    使用迭代函数循环所有的值：
+    -- print all values of table 't'
+    for k, v in pairs(t) do print(k, v) end
+    
+    lua的库提供了几个迭代函数：行的迭代（io.lines）  table的迭代 (pairs) 输入的迭代(ipairs) string的迭代(string.gmatch)  等等
+    当然我们也可以写自己的迭代器，第7章。
+    
+    generic 的 numeric 的循环共享两个属性：循环体的变量 ，你不该分配任何值给它。
+    
+    table循环，例子：
+    days = {"Sunday", "Monday", "Tuesday", "Wednesday",
+            "Thursday", "Friday", "Saturday"}
+    
+    你可以查询对应的table  name。很快你就会知道，lua很多查询table。更好的方式是创建一个相反的table revDays：
+    revDays = {["Sunday"] = 1, ["Monday"] = 2,
+               ["Tuesday"] = 3, ["Wednesday"] = 4,
+               ["Thursday"] = 5, ["Friday"] = 6,
+               ["Saturday"] = 7}
+               
+    x = "Tuesday"
+    print(revDays[x]) --> 3
+    
+    我们不用手动去声明revDays，例子：
+    revDays = {}
+    for k,v in pairs(days) do
+    revDays[v] = k
+    end
+    
+    
+    
+    
+    
+    
+    
